@@ -49,7 +49,12 @@ DESCRIPTION:
 
 OPTIONS:
    {{range .VisibleFlags}}{{.}}
-   {{end}}{{end}}
+   {{end}}{{end}}{{if ne (index .Metadata "__global-flags__") nil}}
+
+GLOBAL OPTIONS:
+   {{$globalFlags := index .Metadata "__global-flags__"}}
+   {{range $index, $option := $globalFlags}}{{if $index}}
+   {{end}}{{$option}}{{end}}{{end}}
 `
 
 // SubcommandHelpTemplate is the text template for the subcommand help topic.
@@ -71,7 +76,12 @@ COMMANDS:{{range .VisibleCategories}}{{if .Name}}
 
 OPTIONS:
    {{range .VisibleFlags}}{{.}}
-   {{end}}{{end}}
+   {{end}}{{end}}{{if ne (index .Metadata "__global-flags__") nil}}
+
+GLOBAL OPTIONS:
+   {{$globalFlags := index .Metadata "__global-flags__"}}
+   {{range $index, $option := $globalFlags}}{{if $index}}
+   {{end}}{{$option}}{{end}}{{end}}
 `
 
 var MarkdownDocTemplate = `% {{ .App.Name }} 8

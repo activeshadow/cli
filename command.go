@@ -224,7 +224,12 @@ func (c *Command) startApp(ctx *Context) error {
 	if c.HelpName == "" {
 		app.HelpName = c.HelpName
 	} else {
-		app.HelpName = app.Name
+		if len(ctx.App.VisibleFlags()) != 0 {
+			app.HelpName = fmt.Sprintf("%s [global options] %s", ctx.App.Name, c.Name)
+			app.Metadata["__global-flags__"] = ctx.App.VisibleFlags()
+		} else {
+			app.HelpName = app.Name
+		}
 	}
 
 	app.Usage = c.Usage
