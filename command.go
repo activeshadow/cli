@@ -241,8 +241,6 @@ func (c *Command) startApp(ctx *Context) error {
 	app.HideHelp = c.HideHelp
 	app.HideHelpCommand = c.HideHelpCommand
 
-	app.Version = ctx.App.Version
-	app.HideVersion = ctx.App.HideVersion
 	app.Compiled = ctx.App.Compiled
 	app.Writer = ctx.App.Writer
 	app.ErrWriter = ctx.App.ErrWriter
